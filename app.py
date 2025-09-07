@@ -1,59 +1,70 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
 
 # ===== Page Config =====
 st.set_page_config(page_title="ADR Prediction Dashboard", layout="wide")
 
+# ===== Load Data =====
+data = pd.read_csv("ADR_multi_label_100.csv")
+
 # ===== Sidebar Inputs =====
 st.sidebar.header("Patient Information")
-selected_drug = st.sidebar.selectbox("Select Drug", sorted(pd.read_csv("ADR_multi_label_100.csv")["Generic Name"].unique()))
-age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4–12)", "Teen (13–19)",
-                                                      "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"], index=4)
+selected_drug = st.sidebar.selectbox("Select Drug", sorted(data["Generic Name"].unique()))
+age_group = st.sidebar.selectbox(
+    "Select Age Group", 
+    ["Baby (0–3)", "Child (4–12)", "Teen (13–19)", "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"],
+    index=4  # Default Adult (25–60)
+)
 gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
 dark_mode = st.sidebar.checkbox("Dark Mode", value=False)
 predict_button = st.sidebar.button("Predict ADR")
 
-# ===== Load Data =====
-data = pd.read_csv("ADR_multi_label_100.csv")
+# ===== Color Palettes =====
+colors_light = {
+    "primary_heading": "#1565C0",
+    "section_heading": "#1E88E5",
+    "common_adr": "#388E3C",
+    "serious_adr": "#D32F2F",
+    "progress_low": "#4CAF50",
+    "progress_mid": "#FFC107",
+    "progress_high": "#E53935",
+    "card_bg": "#ffffff",
+    "text": "#000000"
+}
 
-# ===== CSS Styling =====
-if dark_mode:
-    bg_color = "#1e1e1e"
-    text_color = "#ffffff"
-    card_bg = "#2b2b2b"
-    section_color = "#90CAF9"
-    subtitle_color = "#cccccc"
-    kpi_bg = "#424242"
-    kpi_text = "#ffffff"
-else:
-    bg_color = "#ffffff"
-    text_color = "#000000"
-    card_bg = "#ffffff"
-    section_color = "#1E88E5"
-    subtitle_color = "#555555"
-    kpi_bg = "#F1F8E9"
-    kpi_text = "#000000"
+colors_dark = {
+    "primary_heading": "#90CAF9",
+    "section_heading": "#64B5F6",
+    "common_adr": "#81C784",
+    "serious_adr": "#EF9A9A",
+    "progress_low": "#81C784",
+    "progress_mid": "#FFD54F",
+    "progress_high": "#EF5350",
+    "card_bg": "#2E2E2E",
+    "text": "#FFFFFF"
+}
 
+colors = colors_dark if dark_mode else colors_light
+
+# ===== Custom CSS =====
 st.markdown(f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
     html, body, [class*="css"] {{
         font-family: 'Poppins', sans-serif;
-        background-color: {bg_color};
-        color: {text_color};
+        background: {"#121212" if dark_mode else "#F5F7FA"};
+        color: {colors["text"]};
     }}
-    .title {{ font-size:36px; font-weight:700; color:#1565C0; margin-bottom:0; }}
-    .subtitle {{ font-size:16px; color:{subtitle_color}; margin-bottom:20px; }}
-    .section {{ font-size:20px; font-weight:600; color:{section_color}; margin-bottom:8px; }}
-    .card {{ background:{card_bg}; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.15); margin-bottom:15px; }}
+
+    .title {{ font-size:36px; font-weight:700; color:{colors["primary_heading"]}; margin-bottom:0; }}
+    .subtitle {{ font-size:16px; color:{colors["text"]}; margin-bottom:20px; }}
+    .section {{ font-size:20px; font-weight:600; color:{colors["section_heading"]}; margin-bottom:8px; }}
+    .card {{ background:{colors["card_bg"]}; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.15); margin-bottom:15px; color:{colors["text"]}; }}
     .footer {{ position: fixed; right: 20px; bottom: 10px; font-size:12px; color: grey; font-style: italic; }}
     .progress-container {{ width:100%; background:#eee; border-radius:12px; height:24px; margin-top:5px; }}
     .progress-bar {{ height:100%; border-radius:12px; text-align:center; color:white; font-weight:bold; line-height:24px; }}
-    .kpi {{ background:{kpi_bg}; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px; color:{kpi_text};}}
+    .kpi {{ background:#F1F8E9; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px; }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -89,7 +100,7 @@ if predict_button:
                 unsafe_allow_html=True
             )
 
-            # ---- KPI Panels ----
+            # KPI Panels
             st.markdown("<div class='section'>Drug Statistics</div>", unsafe_allow_html=True)
             total_adrs = row.get('Total ADRs', 0)
             num_common = len(str(row.get('Common ADRs','')).split(",")) if row.get('Common ADRs') else 0
@@ -110,28 +121,28 @@ if predict_button:
             serious_adrs = str(row.get('Serious ADRs','')).split(",")
 
             # ADR Details Card
-            common_html = "".join([f"<span style='color:green; font-weight:600;'>{adr.strip()}</span>, " for adr in common_adrs if adr.strip()!="None"])
-            serious_html = "".join([f"<span style='color:red; font-weight:600;'>{adr.strip()}</span>, " for adr in serious_adrs if adr.strip()!="None"])
+            common_html = ", ".join([f"<span style='color:{colors['common_adr']}; font-weight:600;'>{adr.strip()}</span>" for adr in common_adrs if adr.strip()!="None"])
+            serious_html = ", ".join([f"<span style='color:{colors['serious_adr']}; font-weight:600;'>{adr.strip()}</span>" for adr in serious_adrs if adr.strip()!="None"])
 
             st.markdown(
                 f"<div class='card'>"
-                f"<b>Common ADRs:</b> {common_html[:-2]}<br>"
-                f"<b>Serious ADRs:</b> {serious_html[:-2]}<br>"
+                f"<b>Common ADRs:</b> {common_html}<br>"
+                f"<b>Serious ADRs:</b> {serious_html}<br>"
                 f"<b>ADR Categories:</b> {row.get('ADR Label','N/A')}"
                 f"</div>",
                 unsafe_allow_html=True
             )
 
-            # Gradient progress bar aligned under ADR details
+            # Gradient progress bar
             chance_serious = row.get("Chance of Serious ADR (%)", 0)
             if pd.isna(chance_serious): chance_serious = 0
 
             if chance_serious < 33:
-                color = "#4CAF50"
+                color = colors["progress_low"]
             elif chance_serious < 66:
-                color = "#FFC107"
+                color = colors["progress_mid"]
             else:
-                color = "#E53935"
+                color = colors["progress_high"]
 
             st.markdown("*Chance of Serious ADR:*")
             st.markdown(
@@ -156,30 +167,41 @@ if predict_button:
 
             st.markdown(f"*ADR Risk Status:* <span style='color:{risk_color}; font-weight:bold;'>{risk_status}</span>", unsafe_allow_html=True)
 
-            # ---- PDF Download Button ----
-            buffer = io.BytesIO()
-            c = canvas.Canvas(buffer, pagesize=letter)
-            c.setFont("Helvetica-Bold", 16)
-            c.drawString(50, 750, f"ADR Prediction Report - {selected_drug}")
-            c.setFont("Helvetica", 12)
-            c.drawString(50, 720, f"Age Group: {age_group}, Gender: {gender}")
-            c.drawString(50, 700, f"Generic Name: {row.get('Generic Name','N/A')}")
-            c.drawString(50, 680, f"Therapeutic Class: {row.get('Therapeutic Class','N/A')}")
-            c.drawString(50, 660, f"Route: {row.get('Route','N/A')}")
-            c.drawString(50, 640, f"Usual Dose: {row.get('Usual Adult Dose','N/A')}")
-            c.drawString(50, 620, f"Total ADRs: {total_adrs}")
-            c.drawString(50, 600, f"Common ADRs: {', '.join(common_adrs)}")
-            c.drawString(50, 580, f"Serious ADRs: {', '.join(serious_adrs)}")
-            c.drawString(50, 560, f"Chance of Serious ADR: {int(chance_serious)}%")
-            c.drawString(50, 540, f"ADR Risk Status: {risk_status}")
-            c.save()
-            buffer.seek(0)
-            st.download_button(
-                label="📄 Download PDF Report",
-                data=buffer,
-                file_name=f"ADR_Report_{selected_drug}.pdf",
-                mime="application/pdf"
-            )
+            # ---- Download PDF Button ----
+            import io
+            from reportlab.pdfgen import canvas
+            from reportlab.lib.pagesizes import letter
+
+            def generate_pdf():
+                buffer = io.BytesIO()
+                c = canvas.Canvas(buffer, pagesize=letter)
+                textobject = c.beginText(40, 700)
+                textobject.setFont("Helvetica-Bold", 14)
+                textobject.textLine("ADR Prediction Report")
+                textobject.setFont("Helvetica", 12)
+                textobject.textLine(f"Patient Age Group: {age_group}")
+                textobject.textLine(f"Gender: {gender}")
+                textobject.textLine(f"Drug: {row.get('Generic Name','N/A')}")
+                textobject.textLine(f"Therapeutic Class: {row.get('Therapeutic Class','N/A')}")
+                textobject.textLine(f"Route: {row.get('Route','N/A')}")
+                textobject.textLine(f"Usual Dose: {row.get('Usual Adult Dose','N/A')}")
+                textobject.textLine("")
+                textobject.textLine(f"Common ADRs: {', '.join([adr.strip() for adr in common_adrs if adr.strip()!='None'])}")
+                textobject.textLine(f"Serious ADRs: {', '.join([adr.strip() for adr in serious_adrs if adr.strip()!='None'])}")
+                textobject.textLine(f"ADR Categories: {row.get('ADR Label','N/A')}")
+                textobject.textLine(f"Total ADRs: {total_adrs}")
+                textobject.textLine(f"Chance of Serious ADR: {int(chance_serious)}%")
+                textobject.textLine(f"ADR Risk Status: {risk_status}")
+                c.drawText(textobject)
+                c.showPage()
+                c.save()
+                buffer.seek(0)
+                return buffer
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button("📄 Download ADR Report (PDF)"):
+                pdf_buffer = generate_pdf()
+                st.download_button("Download PDF", pdf_buffer, file_name="ADR_Report.pdf", mime="application/pdf")
 
 # ===== Footer =====
 st.markdown("<div class='footer'>Developed by Harshit Tyagi</div>", unsafe_allow_html=True)
