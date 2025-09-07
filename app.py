@@ -3,43 +3,59 @@ import pandas as pd
 import numpy as np
 import io
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 # ===== Page Config =====
 st.set_page_config(page_title="ADR Prediction Dashboard", layout="wide")
 
-# ===== Custom CSS =====
-st.markdown("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-    html, body, [class*="css"] { 
-        font-family: 'Poppins', sans-serif; 
-        background-color: #ffffff;
-    }
-
-    .title { font-size:36px; font-weight:700; color:#1565C0; margin-bottom:0; }
-    .subtitle { font-size:16px; color:#555555; margin-bottom:20px; }
-    .section { font-size:20px; font-weight:600; color:#1E88E5; margin-bottom:8px; }
-    .card { background:#f9f9f9; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.08); margin-bottom:15px; transition: transform 0.2s ease-in-out; }
-    .card:hover { transform: scale(1.02); box-shadow:0px 5px 15px rgba(0,0,0,0.15); }
-    .footer { position: fixed; right: 20px; bottom: 10px; font-size:12px; color: grey; font-style: italic; }
-    .progress-container { width:100%; background:#eee; border-radius:12px; height:24px; margin-top:5px; }
-    .progress-bar { height:100%; border-radius:12px; text-align:center; color:white; font-weight:bold; line-height:24px; }
-    .kpi { background:#F1F8E9; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px;}
-    .download-btn { margin-top:15px; }
-    </style>
-""", unsafe_allow_html=True)
+# ===== Sidebar Inputs =====
+st.sidebar.header("Patient Information")
+selected_drug = st.sidebar.selectbox("Select Drug", sorted(pd.read_csv("ADR_multi_label_100.csv")["Generic Name"].unique()))
+age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4–12)", "Teen (13–19)",
+                                                      "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"], index=4)
+gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
+dark_mode = st.sidebar.checkbox("Dark Mode", value=False)
+predict_button = st.sidebar.button("Predict ADR")
 
 # ===== Load Data =====
 data = pd.read_csv("ADR_multi_label_100.csv")
 
-# ===== Sidebar Inputs =====
-st.sidebar.header("Patient Information")
-selected_drug = st.sidebar.selectbox("Select Drug", sorted(data["Generic Name"].unique()))
-age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4–12)", "Teen (13–19)",
-                                                      "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"])
-gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
-predict_button = st.sidebar.button("Predict ADR")
+# ===== CSS Styling =====
+if dark_mode:
+    bg_color = "#1e1e1e"
+    text_color = "#ffffff"
+    card_bg = "#2b2b2b"
+    section_color = "#90CAF9"
+    subtitle_color = "#cccccc"
+    kpi_bg = "#424242"
+    kpi_text = "#ffffff"
+else:
+    bg_color = "#ffffff"
+    text_color = "#000000"
+    card_bg = "#ffffff"
+    section_color = "#1E88E5"
+    subtitle_color = "#555555"
+    kpi_bg = "#F1F8E9"
+    kpi_text = "#000000"
+
+st.markdown(f"""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    html, body, [class*="css"] {{
+        font-family: 'Poppins', sans-serif;
+        background-color: {bg_color};
+        color: {text_color};
+    }}
+    .title {{ font-size:36px; font-weight:700; color:#1565C0; margin-bottom:0; }}
+    .subtitle {{ font-size:16px; color:{subtitle_color}; margin-bottom:20px; }}
+    .section {{ font-size:20px; font-weight:600; color:{section_color}; margin-bottom:8px; }}
+    .card {{ background:{card_bg}; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.15); margin-bottom:15px; }}
+    .footer {{ position: fixed; right: 20px; bottom: 10px; font-size:12px; color: grey; font-style: italic; }}
+    .progress-container {{ width:100%; background:#eee; border-radius:12px; height:24px; margin-top:5px; }}
+    .progress-bar {{ height:100%; border-radius:12px; text-align:center; color:white; font-weight:bold; line-height:24px; }}
+    .kpi {{ background:{kpi_bg}; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px; color:{kpi_text};}}
+    </style>
+""", unsafe_allow_html=True)
 
 # ===== Title =====
 st.markdown("<div class='title'>💊 ADR Prediction Dashboard</div>", unsafe_allow_html=True)
@@ -141,26 +157,29 @@ if predict_button:
             st.markdown(f"*ADR Risk Status:* <span style='color:{risk_color}; font-weight:bold;'>{risk_status}</span>", unsafe_allow_html=True)
 
             # ---- PDF Download Button ----
-            st.markdown("<br>", unsafe_allow_html=True)
-            pdf_button_label = "📄 Download PDF Report"
-            pdf_buffer = io.BytesIO()
-            c = canvas.Canvas(pdf_buffer)
+            buffer = io.BytesIO()
+            c = canvas.Canvas(buffer, pagesize=letter)
             c.setFont("Helvetica-Bold", 16)
-            c.drawString(50, 800, f"ADR Prediction Report")
+            c.drawString(50, 750, f"ADR Prediction Report - {selected_drug}")
             c.setFont("Helvetica", 12)
-            c.drawString(50, 770, f"Patient Info: Age Group - {age_group}, Gender - {gender}")
-            c.drawString(50, 750, f"Drug: {selected_drug}")
-            c.drawString(50, 730, f"Common ADRs: {row.get('Common ADRs','N/A')}")
-            c.drawString(50, 710, f"Serious ADRs: {row.get('Serious ADRs','N/A')}")
-            c.drawString(50, 690, f"ADR Categories: {row.get('ADR Label','N/A')}")
-            c.drawString(50, 670, f"Total ADRs: {row.get('Total ADRs','N/A')}")
-            c.drawString(50, 650, f"Chance of Serious ADR: {chance_serious}%")
-            c.drawString(50, 630, f"ADR Risk Status: {risk_status}")
-            c.showPage()
+            c.drawString(50, 720, f"Age Group: {age_group}, Gender: {gender}")
+            c.drawString(50, 700, f"Generic Name: {row.get('Generic Name','N/A')}")
+            c.drawString(50, 680, f"Therapeutic Class: {row.get('Therapeutic Class','N/A')}")
+            c.drawString(50, 660, f"Route: {row.get('Route','N/A')}")
+            c.drawString(50, 640, f"Usual Dose: {row.get('Usual Adult Dose','N/A')}")
+            c.drawString(50, 620, f"Total ADRs: {total_adrs}")
+            c.drawString(50, 600, f"Common ADRs: {', '.join(common_adrs)}")
+            c.drawString(50, 580, f"Serious ADRs: {', '.join(serious_adrs)}")
+            c.drawString(50, 560, f"Chance of Serious ADR: {int(chance_serious)}%")
+            c.drawString(50, 540, f"ADR Risk Status: {risk_status}")
             c.save()
-            pdf_buffer.seek(0)
-
-            st.download_button(pdf_button_label, pdf_buffer, file_name="ADR_Report.pdf", mime="application/pdf", key="pdf_btn", help="Click to download your ADR report")
+            buffer.seek(0)
+            st.download_button(
+                label="📄 Download PDF Report",
+                data=buffer,
+                file_name=f"ADR_Report_{selected_drug}.pdf",
+                mime="application/pdf"
+            )
 
 # ===== Footer =====
 st.markdown("<div class='footer'>Developed by Harshit Tyagi</div>", unsafe_allow_html=True)
