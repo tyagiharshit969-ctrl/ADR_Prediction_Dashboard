@@ -1,0 +1,101 @@
+Generic Name,Therapeutic Class,Route,Usual Adult Dose,Age Group,Common ADRs,Serious ADRs,ADR Label,Total ADRs,Chance of Serious ADR (%),ADR Risk Status
+Metformin,Antidiabetic,Inhalation,14 mg once daily,Elderly,Fatigue,None reported,Cardiac;Hematologic;Endocrine,4,33,Low
+Glimepiride,Antidiabetic,Oral,12 mg twice daily,Adults,"Nausea, Flushing, Fatigue","Pulmonary edema, Severe hypoglycemia",Respiratory,5,32,Low
+Sitagliptin,Antidiabetic,IV,150 mg every 6-8 h,Adults,Cough,GI bleeding,Metabolic,2,48,High
+Insulin Glargine,Antidiabetic,Topical,30 mg once daily,Elderly,"Headache, Insomnia, Palpitations","QT prolongation, Arrhythmia",CNS;Cardiac;GI,5,40,High
+Empagliflozin,Antidiabetic,IV,14 mg once weekly,Adults,"Palpitations, Rash, Dizziness",Arrhythmia,Endocrine,4,79,High
+Pioglitazone,Antidiabetic,Oral,450 mg once daily at bedtime,Adults,"Fatigue, Dizziness, GI upset",QT prolongation,Hematologic;CNS;Hepatic,6,72,High
+Acarbose,Antidiabetic,Oral,75 mg once weekly,Adults,Constipation,"Arrhythmia, Hepatotoxicity",Respiratory;Metabolic;Endocrine,3,35,High
+Repaglinide,Antidiabetic,IV,365 mg every 12 h,Adults,"Insomnia, Constipation, Palpitations",Hepatotoxicity,Hematologic,4,21,Low
+Insulin Aspart,Antidiabetic,Oral,16 mg once daily at bedtime,Adults,"Insomnia, Constipation, Headache",Severe hypoglycemia,Respiratory;Hematologic;Renal,4,73,High
+Insulin Lispro,Antidiabetic,Inhalation,365 mg every 6-8 h,Elderly,"Headache, Dry mouth",Renal injury,GI;Renal,4,84,High
+Amlodipine,Antihypertensive,Oral,500 mg every 6-8 h,Elderly,"Constipation, Fatigue, Dizziness",Renal injury,Hematologic;GI;Hepatic,4,30,Low
+Lisinopril,Antihypertensive,IM,25 mg once daily,Adults,"Headache, Palpitations, Vomiting",GI bleeding,Allergic;Endocrine;Respiratory,4,33,Low
+Losartan,Antihypertensive,Topical,450 mg once weekly,Pediatric,"Cough, Vomiting, Palpitations",None reported,Renal;Metabolic;Hepatic,3,52,High
+Atenolol,Antihypertensive,Oral,25 mg twice daily,Adults,Constipation,"Hepatotoxicity, Bone marrow suppression",Cardiac,5,63,High
+Metoprolol,Antihypertensive,Oral,10 mg every 6-8 h,Adults,Dry mouth,"Seizures, Hepatotoxicity",Allergic;Skin;Respiratory,3,80,High
+Propranolol,Antihypertensive,Subcutaneous,20 mg once daily,Adults,"Rash, Insomnia",Seizures,GI;Cardiac;Endocrine,3,74,High
+Diltiazem,Antihypertensive,IV,20 mg twice daily,Adults,Insomnia,None reported,Respiratory;CNS,6,9,Low
+Verapamil,Antihypertensive,Subcutaneous,365 mg once daily,Adults,"Palpitations, Nausea, Headache",None reported,Metabolic,3,35,High
+Hydralazine,Antihypertensive,IV,125 mg once daily,Adults,Insomnia,Seizures,Metabolic;Hematologic,5,75,High
+Clonidine,Antihypertensive,IV,20 mg every 6-8 h,Adults,Constipation,"Pulmonary edema, Anaphylaxis",Hepatic;GI;Skin,4,77,High
+Hydrochlorothiazide,Diuretic,IV,10 mg every 12 h,Adults,Headache,"GI bleeding, Hepatotoxicity",Cardiac;Skin,3,72,High
+Furosemide,Diuretic,Topical,12 mg once weekly,Elderly,"Flushing, Rash, Dry mouth",None reported,Hepatic;CNS;Renal,3,33,Low
+Spironolactone,Diuretic,IM,200 mg every 6-8 h,Pediatric,Nausea,Bone marrow suppression,Cardiac;Endocrine;Hematologic,2,59,High
+Bumetanide,Diuretic,IM,12 mg twice daily,Adults,GI upset,"QT prolongation, Pulmonary edema",Endocrine,6,59,High
+Indapamide,Diuretic,Inhalation,14 mg twice daily,Adults,Vomiting,"Renal injury, QT prolongation",Skin;CNS,5,42,High
+Chlorthalidone,Diuretic,Inhalation,500 mg every 6-8 h,Adults,"Palpitations, Nausea",None reported,Metabolic;Renal;GI,2,30,Low
+Torsemide,Diuretic,Inhalation,30 mg twice daily,Elderly,"Vomiting, Insomnia, Flushing",None reported,Cardiac,5,31,Low
+Amiloride,Diuretic,Oral,100 mg every 12 h,Adults,"Dizziness, Nausea",Arrhythmia,Hepatic,3,68,High
+Mannitol,Diuretic,IM,365 mg once weekly,Pediatric,"Dizziness, Fatigue, Palpitations",None reported,GI;Allergic,5,26,Low
+Acetazolamide,Diuretic,Subcutaneous,25 mg every 6-8 h,Adults,"Headache, Insomnia, Nausea",Hepatotoxicity,Respiratory,4,41,High
+Amoxicillin,Antibiotic,IV,5 mg once daily at bedtime,Adults,"Dry mouth, Headache",Arrhythmia,Hematologic;Metabolic;Endocrine,3,19,Low
+Azithromycin,Antibiotic,IM,18 mg every 12 h,Pediatric,"Nausea, Headache","Severe hypoglycemia, Arrhythmia",Hepatic;Metabolic;Hematologic,4,63,High
+Ceftriaxone,Antibiotic,IM,10 mg once daily at bedtime,Adults,"Cough, Flushing, Diarrhea","Hepatotoxicity, Arrhythmia",Cardiac;Hepatic,5,47,High
+Ciprofloxacin,Antibiotic,Topical,50 mg once daily at bedtime,Adults,"Vomiting, Dry mouth","Renal injury, Hepatotoxicity",Endocrine;Metabolic,5,67,High
+Doxycycline,Antibiotic,Topical,400 mg every 6-8 h,Adults,Dry mouth,Hepatotoxicity,Skin;Endocrine,5,49,High
+Vancomycin,Antibiotic,Subcutaneous,200 mg once daily at bedtime,Adults,"Cough, Palpitations","Renal injury, GI bleeding",Hematologic;Skin,4,27,Low
+Gentamicin,Antibiotic,Inhalation,50 mg twice daily,Elderly,Nausea,None reported,Respiratory,4,59,High
+Clindamycin,Antibiotic,Oral,200 mg once weekly,Pediatric,"Fatigue, Vomiting, Cough",Seizures,CNS;Allergic,5,59,High
+Metronidazole,Antibiotic,Oral,150 mg twice daily,Adults,"Flushing, GI upset, Nausea","Hepatotoxicity, GI bleeding",Allergic;Respiratory,5,65,High
+Linezolid,Antibiotic,Topical,75 mg once weekly,Elderly,"Flushing, Insomnia, Palpitations",Renal injury,Respiratory;Endocrine;Renal,6,58,High
+Morphine,Opioid,Topical,250 mg once daily at bedtime,Adults,"Headache, Vomiting",Hepatotoxicity,Hepatic;Endocrine,4,28,Low
+Tramadol,Opioid,IV,125 mg once daily at bedtime,Adults,Headache,Severe hypoglycemia,Hematologic;Respiratory,3,24,Low
+Oxycodone,Opioid,Subcutaneous,125 mg every 12 h,Pediatric,Palpitations,"Severe hypoglycemia, Seizures",Hepatic,3,88,High
+Hydromorphone,Opioid,Topical,365 mg every 12 h,Pediatric,"Fatigue, Dry mouth",Seizures,Metabolic,3,69,High
+Fentanyl,Opioid,Inhalation,18 mg once weekly,Pediatric,"Flushing, Nausea, Insomnia","Bone marrow suppression, Anaphylaxis",Endocrine,5,37,High
+Codeine,Opioid,IV,10 mg every 6-8 h,Adults,GI upset,Arrhythmia,Renal;Metabolic,2,85,High
+Methadone,Opioid,Oral,365 mg once daily,Pediatric,"Fatigue, Diarrhea",None reported,GI;Endocrine;CNS,2,58,High
+Buprenorphine,Opioid,Oral,450 mg twice daily,Adults,"Diarrhea, Headache","Hepatotoxicity, Seizures",Renal;Hepatic;Allergic,4,61,High
+Tapentadol,Opioid,IM,14 mg every 12 h,Adults,"Constipation, Diarrhea",Severe hypoglycemia,CNS;Cardiac;Endocrine,3,87,High
+Nalbuphine,Opioid,Oral,400 mg once daily,Adults,"Diarrhea, Rash",None reported,Endocrine;Hepatic;GI,6,46,High
+Paracetamol,Analgesic,Oral,150 mg every 6-8 h,Elderly,"Vomiting, Dizziness",Renal injury,Hematologic;Renal;Endocrine,6,72,High
+Ibuprofen,Analgesic,Inhalation,400 mg every 6-8 h,Adults,Palpitations,None reported,Respiratory;CNS,6,34,Low
+Naproxen,Analgesic,Topical,450 mg once daily at bedtime,Adults,GI upset,Renal injury,CNS;Hepatic,6,49,High
+Celecoxib,Analgesic,Topical,30 mg every 12 h,Adults,Headache,None reported,Metabolic;Respiratory;Hematologic,6,20,Low
+Diclofenac,Analgesic,Inhalation,250 mg once daily at bedtime,Elderly,"Cough, Nausea",None reported,CNS;Metabolic,5,20,Low
+Ketorolac,Analgesic,IM,400 mg every 6-8 h,Adults,"Rash, Insomnia, Vomiting","Arrhythmia, Bone marrow suppression",Respiratory;Renal;Skin,5,38,High
+Meloxicam,Analgesic,IM,14 mg once daily at bedtime,Adults,"Dizziness, Fatigue, Cough","Seizures, QT prolongation",Skin;Hematologic;Renal,5,83,High
+Piroxicam,Analgesic,IV,100 mg twice daily,Adults,"Flushing, Dizziness, Dry mouth",None reported,Hematologic,3,49,High
+Indomethacin,Analgesic,IV,500 mg once weekly,Adults,Constipation,Seizures,Respiratory;Hepatic,2,41,High
+Aspirin,Analgesic,Oral,12 mg once weekly,Adults,"Diarrhea, Palpitations, Nausea",None reported,Skin,3,10,Low
+Omeprazole,Proton Pump Inhibitor,IV,14 mg every 12 h,Elderly,"Constipation, Cough, Palpitations",None reported,Metabolic;Respiratory;Skin,3,60,High
+Pantoprazole,Proton Pump Inhibitor,Topical,150 mg every 6-8 h,Adults,Constipation,"GI bleeding, Hepatotoxicity",CNS;Renal;Cardiac,3,52,High
+Esomeprazole,Proton Pump Inhibitor,Oral,18 mg once daily,Adults,"Constipation, GI upset, Dry mouth",None reported,Renal,5,37,High
+Lansoprazole,Proton Pump Inhibitor,Oral,25 mg every 6-8 h,Elderly,"Constipation, Diarrhea, Fatigue",GI bleeding,CNS;Allergic;Renal,6,27,Low
+Rabeprazole,Proton Pump Inhibitor,IV,50 mg every 12 h,Elderly,"Dry mouth, GI upset, Headache",QT prolongation,Metabolic;Renal;Hematologic,4,62,High
+Dexlansoprazole,Proton Pump Inhibitor,Topical,10 mg once weekly,Elderly,"Dry mouth, Nausea, Headache",None reported,Skin;Endocrine;GI,6,48,High
+Ilaprazole,Proton Pump Inhibitor,IM,400 mg once daily,Elderly,GI upset,"Seizures, QT prolongation",Skin,3,70,High
+Tenatoprazole,Proton Pump Inhibitor,Oral,250 mg every 6-8 h,Adults,"Diarrhea, Headache",None reported,Metabolic;Respiratory,2,47,High
+Zegerid (omeprazole+sodium bicarbonate),Proton Pump Inhibitor,Subcutaneous,365 mg once daily,Adults,"Dry mouth, Rash",None reported,Hematologic;GI,5,60,High
+Omeprazole Mg,Proton Pump Inhibitor,Topical,200 mg once weekly,Adults,"Rash, Constipation, GI upset","Seizures, Anaphylaxis",Renal,5,46,High
+Cetirizine,Antihistamine,Inhalation,250 mg once daily,Adults,"Constipation, Cough, Fatigue","Renal injury, QT prolongation",GI;Hematologic;Metabolic,5,32,Low
+Loratadine,Antihistamine,Subcutaneous,14 mg once daily at bedtime,Elderly,"Vomiting, Dry mouth","QT prolongation, Severe hypoglycemia",Respiratory;CNS,4,54,High
+Fexofenadine,Antihistamine,Subcutaneous,20 mg every 12 h,Adults,Palpitations,None reported,Metabolic;Hepatic,6,45,High
+Diphenhydramine,Antihistamine,Oral,50 mg once daily at bedtime,Adults,"Constipation, Diarrhea, GI upset",None reported,Hematologic;Respiratory,3,26,Low
+Chlorpheniramine,Antihistamine,Topical,365 mg once weekly,Adults,"Palpitations, Fatigue","Hepatotoxicity, Severe hypoglycemia",Metabolic,4,50,High
+Promethazine,Antihistamine,Inhalation,125 mg once weekly,Pediatric,"Dizziness, GI upset, Nausea",None reported,Skin;Hepatic;Cardiac,6,73,High
+Desloratadine,Antihistamine,Oral,300 mg once weekly,Adults,Insomnia,"Renal injury, GI bleeding",Renal;Hepatic,4,91,High
+Levocetirizine,Antihistamine,Oral,75 mg once daily at bedtime,Pediatric,"Rash, Diarrhea","Seizures, Pulmonary edema",Skin,4,50,High
+Azelastine,Antihistamine,Inhalation,50 mg twice daily,Elderly,"Headache, Cough","GI bleeding, Seizures",Renal,4,28,Low
+Mizolastine,Antihistamine,IM,100 mg every 6-8 h,Adults,Flushing,Bone marrow suppression,Allergic;Endocrine;Skin,2,66,High
+Prednisone,Corticosteroid,Topical,25 mg once weekly,Pediatric,Fatigue,QT prolongation,Renal;GI,6,70,High
+Hydrocortisone,Corticosteroid,IV,12 mg once weekly,Pediatric,"Dry mouth, Diarrhea, Insomnia","QT prolongation, Seizures",CNS;Metabolic,6,48,High
+Budesonide,Corticosteroid,IV,125 mg every 12 h,Adults,"Vomiting, Dry mouth",None reported,Metabolic;Renal;GI,4,61,High
+Fluticasone,Corticosteroid,Topical,250 mg every 6-8 h,Elderly,Constipation,Hepatotoxicity,CNS;Skin;Renal,5,87,High
+Methylprednisolone,Corticosteroid,Oral,500 mg once daily at bedtime,Adults,"Nausea, Constipation",Renal injury,Renal,3,80,High
+Triamcinolone,Corticosteroid,IV,16 mg every 12 h,Pediatric,"Flushing, Palpitations",Renal injury,Respiratory;Renal,5,83,High
+Dexamethasone,Corticosteroid,Subcutaneous,12 mg twice daily,Elderly,Palpitations,"Severe hypoglycemia, Pulmonary edema",Cardiac;Metabolic,3,51,High
+Beclomethasone,Corticosteroid,Subcutaneous,100 mg once daily at bedtime,Elderly,"Constipation, Insomnia","Arrhythmia, GI bleeding",CNS;Respiratory;GI,4,60,High
+Betamethasone,Corticosteroid,Topical,25 mg once daily at bedtime,Adults,"Vomiting, Dry mouth","Severe hypoglycemia, GI bleeding",GI,4,49,High
+Aclometasone,Corticosteroid,Oral,14 mg twice daily,Pediatric,Insomnia,Arrhythmia,Hematologic;Metabolic;Allergic,3,59,High
+Warfarin,Anticoagulant/Antiplatelet,Subcutaneous,450 mg once weekly,Pediatric,"Nausea, Vomiting",Hepatotoxicity,Respiratory;CNS,6,41,High
+Heparin,Anticoagulant/Antiplatelet,Inhalation,100 mg every 12 h,Pediatric,"Rash, Nausea, Insomnia",Hepatotoxicity,Respiratory,4,63,High
+Dabigatran,Anticoagulant/Antiplatelet,Inhalation,500 mg every 12 h,Pediatric,Cough,Hepatotoxicity,Skin,2,36,High
+Rivaroxaban,Anticoagulant/Antiplatelet,IV,400 mg twice daily,Elderly,Rash,None reported,GI;Renal;Allergic,1,47,High
+Apixaban,Anticoagulant/Antiplatelet,IV,14 mg once daily at bedtime,Pediatric,Nausea,Hepatotoxicity,Hepatic;GI;Allergic,2,35,High
+Clopidogrel,Anticoagulant/Antiplatelet,Topical,14 mg once daily at bedtime,Adults,"Cough, Rash","Bone marrow suppression, GI bleeding",Hematologic;CNS,4,33,Low
+Prasugrel,Anticoagulant/Antiplatelet,IM,200 mg once daily at bedtime,Pediatric,GI upset,Severe hypoglycemia,Cardiac;Respiratory;Skin,2,49,High
+Ticagrelor,Anticoagulant/Antiplatelet,IV,12 mg twice daily,Adults,"Constipation, Flushing, Vomiting",Severe hypoglycemia,Hematologic;Renal;Respiratory,4,69,High
+Enoxaparin,Anticoagulant/Antiplatelet,Inhalation,14 mg once daily at bedtime,Elderly,"Vomiting, Fatigue, Insomnia",Hepatotoxicity,Hepatic;Respiratory,4,54,High
+Dipyridamole,Anticoagulant/Antiplatelet,Subcutaneous,75 mg once daily at bedtime,Adults,Diarrhea,GI bleeding,Cardiac,2,56,High
