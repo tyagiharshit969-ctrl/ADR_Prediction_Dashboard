@@ -21,7 +21,7 @@ def get_css(dark_mode=False):
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         html, body, [class*="css"] { font-family: 'Poppins', sans-serif; background:#121212; color:#FFFFFF; }
-        .title { font-size:36px; font-weight:700; color:#BB86FC; display:flex; align-items:center; justify-content:space-between; }
+        .title { font-size:36px; font-weight:700; color:#BB86FC; }
         .subtitle { font-size:16px; color:#CCCCCC; margin-bottom:20px; }
         .section { font-size:20px; font-weight:600; color:#03DAC6; margin-bottom:8px; }
         .card { background:#1E1E1E; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.3); margin-bottom:15px;
@@ -31,6 +31,7 @@ def get_css(dark_mode=False):
         .progress-container { width:100%; background:#333; border-radius:12px; height:24px; margin-top:5px; }
         .progress-bar { height:100%; border-radius:12px; text-align:center; color:white; font-weight:bold; line-height:24px; }
         .kpi { background:#2C2C2C; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px;}
+        .sidebar-button { display:flex; justify-content:center; }
         </style>
         """
     else:
@@ -38,7 +39,7 @@ def get_css(dark_mode=False):
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         html, body, [class*="css"] { font-family: 'Poppins', sans-serif; background:#FFFFFF; color:#000000; }
-        .title { font-size:36px; font-weight:700; color:#1565C0; display:flex; align-items:center; justify-content:space-between; }
+        .title { font-size:36px; font-weight:700; color:#1565C0; }
         .subtitle { font-size:16px; color:#555555; margin-bottom:20px; }
         .section { font-size:20px; font-weight:600; color:#1E88E5; margin-bottom:8px; }
         .card { background:#ffffff; padding:20px; border-radius:12px; box-shadow:0px 3px 10px rgba(0,0,0,0.15); margin-bottom:15px;
@@ -48,20 +49,14 @@ def get_css(dark_mode=False):
         .progress-container { width:100%; background:#eee; border-radius:12px; height:24px; margin-top:5px; }
         .progress-bar { height:100%; border-radius:12px; text-align:center; color:white; font-weight:bold; line-height:24px; }
         .kpi { background:#F1F8E9; padding:12px 15px; border-radius:10px; margin:5px; display:inline-block; font-weight:600; font-size:14px; text-align:center; min-width:120px;}
+        .sidebar-button { display:flex; justify-content:center; }
         </style>
         """
 
 st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
 
-# ===== Header with Dark Mode Toggle =====
-header_col1, header_col2 = st.columns([8,1])
-with header_col1:
-    st.markdown("<div class='title'>💊 ADR Prediction Dashboard</div>", unsafe_allow_html=True)
-with header_col2:
-    toggle = st.checkbox("🌙", value=st.session_state.dark_mode, key="main_dark_mode")
-    st.session_state.dark_mode = toggle
-    st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
-
+# ===== Header =====
+st.markdown("<div class='title'>💊 ADR Prediction Dashboard</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>AI-powered Adverse Drug Reaction Prediction</div>", unsafe_allow_html=True)
 st.markdown("---")
 
@@ -71,7 +66,15 @@ selected_drug = st.sidebar.selectbox("Select Drug", sorted(data["Generic Name"].
 age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4–12)", "Teen (13–19)",
                                                       "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"], index=4)
 gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
-predict_button = st.sidebar.button("Predict ADR")
+
+# Centered Predict Button
+predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
+st.sidebar.markdown("<br>", unsafe_allow_html=True)
+
+# Dark Mode Toggle Below Button
+toggle = st.sidebar.checkbox("🌙 Dark Mode", value=st.session_state.dark_mode, key="sidebar_dark")
+st.session_state.dark_mode = toggle
+st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
 
 # ===== How to Use Before Prediction =====
 if not predict_button:
@@ -93,10 +96,9 @@ if predict_button:
     else:
         row = filtered_data.iloc[0]
 
-        # Columns: Left = Drug Profile + KPI, Right = ADR Prediction + PDF
         col1, col2 = st.columns([2,2])
 
-        # ---- LEFT: Drug Profile + KPI ----
+        # LEFT: Drug Profile + KPI
         with col1:
             st.markdown("<div class='section'>Drug Profile</div>", unsafe_allow_html=True)
             st.markdown(
@@ -122,7 +124,7 @@ if predict_button:
             )
             st.markdown(kpi_html, unsafe_allow_html=True)
 
-        # ---- RIGHT: ADR Prediction + PDF ----
+        # RIGHT: ADR Prediction + PDF
         with col2:
             st.markdown("<div class='section'>ADR Prediction</div>", unsafe_allow_html=True)
             common_adrs = str(row.get('Common ADRs','')).split(",")
@@ -140,7 +142,7 @@ if predict_button:
                 unsafe_allow_html=True
             )
 
-            # Gradient progress bar
+            # Progress bar
             chance_serious = row.get("Chance of Serious ADR (%)", 0)
             if pd.isna(chance_serious): chance_serious = 0
             if chance_serious < 33:
@@ -160,7 +162,6 @@ if predict_button:
                 """, unsafe_allow_html=True
             )
 
-            # ADR Risk Status
             risk_status = row.get("ADR Risk Status", "N/A")
             if str(risk_status).lower()=="high":
                 risk_color = "#FF5555"
@@ -170,7 +171,7 @@ if predict_button:
                 risk_color = "#4CAF50"
             st.markdown(f"*ADR Risk Status:* <span style='color:{risk_color}; font-weight:bold;'>{risk_status}</span>", unsafe_allow_html=True)
 
-            # PDF Download Button
+            # PDF Button
             st.markdown("<br>", unsafe_allow_html=True)
             buffer = BytesIO()
             c = canvas.Canvas(buffer)
