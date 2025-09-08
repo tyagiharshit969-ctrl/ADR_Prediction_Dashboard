@@ -69,8 +69,9 @@ gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
 
 # Centered Predict Button
 st.sidebar.markdown("<div style='display:flex; justify-content:center; margin-top:20px;'>", unsafe_allow_html=True)
-predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
-st.sidebar.markdown("</div>", unsafe_allow_html=True)
+# Centered Predict Button using columns
+left_col, mid_col, right_col = st.sidebar.columns([1, 2, 1])
+predict_button = mid_col.button("Predict ADR", key="predict", help="Click to predict ADR")
 
 # Dark Mode Toggle Below Button
 toggle = st.sidebar.checkbox("🌙 Dark Mode", value=st.session_state.dark_mode, key="sidebar_dark")
