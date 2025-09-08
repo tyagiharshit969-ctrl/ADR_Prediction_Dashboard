@@ -68,7 +68,9 @@ age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0â€“3)", "Child (4â
 gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
 
 # Centered Predict Button
+st.sidebar.markdown("<div style='display:flex; justify-content:center; margin-top:20px;'>", unsafe_allow_html=True)
 predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
+st.sidebar.markdown("</div>", unsafe_allow_html=True)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
 # Dark Mode Toggle Below Button
