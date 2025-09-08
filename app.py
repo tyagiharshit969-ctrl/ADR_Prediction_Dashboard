@@ -77,7 +77,20 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# ===== Predict ADR Button (Centered & Slightly Up) =====
+st.markdown("""
+    <style>
+    div[data-testid="stSidebar"] div.stButton > button:first-child {
+        width: 100%;
+        margin-top: -10px;   /* Move button slightly up, closer to Gender */
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
+
+# Small space before Dark Mode toggle
+st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
 # Small space before Dark Mode toggle
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
