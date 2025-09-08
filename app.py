@@ -67,45 +67,14 @@ age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4�
                                                       "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"], index=4)
 gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
 
-# ===== Predict ADR Button (Centered & Slightly Up) =====
-st.markdown("""
-    <style>
-    div[data-testid="stSidebar"] div.stButton > button:first-child {
-        width: 100%;
-        margin-top: -10px;   /* Move button slightly up, closer to Gender */
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# ===== Predict ADR Button (Centered & Slightly Up) =====
-st.markdown("""
-    <style>
-    div[data-testid="stSidebar"] div.stButton > button:first-child {
-        width: 100%;
-        margin-top: -10px;   /* Move button slightly up, closer to Gender */
-    }
-    </style>
-""", unsafe_allow_html=True)
-
+# Centered Predict Button
 predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
-
-# Small space before Dark Mode toggle
-st.sidebar.markdown("<br>", unsafe_allow_html=True)
-
-# Small space before Dark Mode toggle
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
 # Dark Mode Toggle Below Button
 toggle = st.sidebar.checkbox("🌙 Dark Mode", value=st.session_state.dark_mode, key="sidebar_dark")
 st.session_state.dark_mode = toggle
 st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
-st.markdown("""
-    <style>
-    .stButton > button {
-        margin-top: -10px;  /* adjust value for vertical position */
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 # ===== How to Use Before Prediction =====
 if not predict_button:
@@ -116,7 +85,7 @@ if not predict_button:
         2. Choose the patient's age group.
         3. Select the patient's gender.
         4. Click *Predict ADR* to see the predicted Adverse Drug Reactions.
-        5. Download the reports in PDF format.
+        5. Download predicted reports in PDF format.
         """
     )
 
