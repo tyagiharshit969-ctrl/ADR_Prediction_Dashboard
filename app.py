@@ -67,8 +67,17 @@ age_group = st.sidebar.selectbox("Select Age Group", ["Baby (0–3)", "Child (4�
                                                       "Young Adult (18–25)", "Adult (25–60)", "Senior (60+)"], index=4)
 gender = st.sidebar.selectbox("Select Gender", ["Male", "Female"])
 
-# Centered Predict Button
-st.sidebar.markdown("<div style='display:flex; justify-content:center; margin-top:20px;'>", unsafe_allow_html=True)
+# Predict Button (closer to Gender)
+st.markdown("""
+    <style>
+    div.stButton > button:first-child {
+        width: 100%;
+        margin-top: -5px;   /* adjust spacing to pull closer to Gender */
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
 # Centered Predict Button using columns
 left_col, mid_col, right_col = st.sidebar.columns([1, 6, 1])
 predict_button = mid_col.button("Predict ADR", key="predict", help="Click to predict ADR")
