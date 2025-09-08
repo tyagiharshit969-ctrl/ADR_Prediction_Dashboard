@@ -76,7 +76,6 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
 predict_button = st.sidebar.button("Predict ADR", key="predict", help="Click to predict ADR")
 # Centered Predict Button using columns
 left_col, mid_col, right_col = st.sidebar.columns([1, 6, 1])
