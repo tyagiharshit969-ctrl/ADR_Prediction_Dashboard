@@ -77,6 +77,13 @@ predict_button = mid_col.button("Predict ADR", key="predict", help="Click to pre
 toggle = st.sidebar.checkbox("🌙 Dark Mode", value=st.session_state.dark_mode, key="sidebar_dark")
 st.session_state.dark_mode = toggle
 st.markdown(get_css(st.session_state.dark_mode), unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    .stButton > button {
+        margin-top: -10px;  /* adjust value for vertical position */
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # ===== How to Use Before Prediction =====
 if not predict_button:
